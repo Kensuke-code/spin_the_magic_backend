@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  db:
+    image: postgres:16.0-alpine3.18
+    volumes:
+      - ./web/tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      TZ: UTC
+
+  web:
+    build: .
+    volumes:
+      - .web:/app
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_PASSWORD: password
+    depends_on:
+      - db
