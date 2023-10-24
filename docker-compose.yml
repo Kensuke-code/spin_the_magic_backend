@@ -1,22 +1,22 @@
-version: '3'
+version: '3.8'
+
 services:
-
   db:
-    image: postgres:16.0-alpine3.18
-    volumes:
-      - ./web/tmp/db:/var/lib/postgresql/data
+    image: postgres:16.0-alpine
     environment:
-      POSTGRES_PASSWORD: password
       TZ: UTC
+      PGTZ: UTC
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - "./tmp/db:/var/lib/postgresql/data"
 
-  web:
+  api:
     build: .
     volumes:
-      - ./web:/app
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    ports:
-      - "3000:3000"
+      - ./:/app
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     depends_on:
       - db
+    ports:
+      - "$API_PORT:3000"
