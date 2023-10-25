@@ -76,11 +76,16 @@ GEM
       tzinfo (~> 2.0)
     base64 (0.1.1)
     bigdecimal (3.1.4)
+    bootsnap (1.16.0)
+      msgpack (~> 1.2)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
+    debug (1.8.0)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     drb (2.1.1)
       ruby2_keywords
     erubi (1.12.0)
@@ -103,6 +108,7 @@ GEM
     marcel (1.0.2)
     mini_mime (1.1.5)
     minitest (5.20.0)
+    msgpack (1.7.2)
     mutex_m (0.1.2)
     net-imap (0.4.2)
       date
@@ -116,8 +122,13 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.4-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-linux)
+      racc (~> 1.4)
+    pg (1.5.4)
     psych (5.1.1.1)
       stringio
+    puma (6.4.0)
+      nio4r (~> 2.0)
     racc (1.7.1)
     rack (3.0.8)
     rack-session (2.0.0)
@@ -175,9 +186,18 @@ GEM
 
 PLATFORMS
   aarch64-linux-musl
+  x86_64-linux-musl
 
 DEPENDENCIES
-  rails (~> 7.1)
+  bootsnap
+  debug
+  pg (~> 1.1)
+  puma (>= 5.0)
+  rails (~> 7.1.1)
+  tzinfo-data
+
+RUBY VERSION
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.10
