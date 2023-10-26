@@ -1,7 +1,7 @@
 # ベースイメージ
 FROM ruby:3.2.2-alpine
 
-ARG RUNTIME_PACKAGES="nodejs tzdata postgresql-dev postgresql git" \
+ARG RUNTIME_PACKAGES="nodejs tzdata postgresql-dev postgresql git gcompat" \
     DEV_PACKAGES="build-base curl-dev"
 ENV LANG=C.UTF-8 \
     TZ=Asia/Tokyo
