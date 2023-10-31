@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       API_DOMAIN: "$DEV_HOST:$FRONT_PORT"
     volumes:
-      - "./tmp/db:/var/lib/postgresql/data"
+      - "./tmp/db:/var/lib/postgresql/data_1"
 
   api:
     build: .
