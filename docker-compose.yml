@@ -1,16 +1,6 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:16.0-alpine
-    environment:
-      TZ: UTC
-      PGTZ: UTC
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      API_DOMAIN: "$DEV_HOST:$FRONT_PORT"
-    volumes:
-      - "./tmp/db:/var/lib/postgresql/data_1"
-
   api:
     build: .
     volumes:
@@ -19,7 +9,17 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       ACCESS_KEY_ID: $ACCESS_KEY_ID
       SECRET_ACCESS_KEY: $SECRET_ACCESS_KEY
+      API_DOMAIN: "$DEV_HOST:$FRONT_PORT"
     depends_on:
       - db
     ports:
       - "$API_PORT:3000"
+
+  db:
+    image: postgres:16.0-alpine
+    environment:
+      TZ: UTC
+      PGTZ: UTC
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - "./tmp/db:/var/lib/postgresql/data_1"
