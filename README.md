@@ -1,24 +1,11 @@
-# README
+# コマンド
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- コンテナに入る
+```
+docker container exec -it spin_the_magic_backend-api-1 sh
+```
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Railsコンソール
+```
+docker compose exec api rails c
+```

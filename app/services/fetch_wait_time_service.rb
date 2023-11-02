@@ -3,7 +3,7 @@ class FetchWaitTimeService
   end
 
   def execute
-    park = 'land'
+    park = 'sea'
     result_string = %x|curl https://r5yd59ix1d.execute-api.ap-northeast-1.amazonaws.com/v1/waittime\?park\=#{park}|
     result = JSON.parse(result_string)
 
