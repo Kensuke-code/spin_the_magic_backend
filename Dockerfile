@@ -8,7 +8,8 @@ ENV LANG=C.UTF-8 \
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 RUN apk update && \
   apk upgrade && \
