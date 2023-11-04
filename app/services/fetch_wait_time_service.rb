@@ -45,6 +45,8 @@ class FetchWaitTimeService
         service["condition"].match?(/^\d+/)
       end
 
+      sort_id = 1
+
       working_attractions = attractions.each_with_object([]) do |attraction,result_array|
         # 公式の掲載にないアトラクションは除外する(グリーティング施設など)
         working_attraction = working_services.find {|service| service["name"] == attraction.scraping_name}
@@ -53,8 +55,10 @@ class FetchWaitTimeService
           result_array << {
             id: attraction.id,
             name: attraction.name,
-            condition: working_attraction["condition"]
+            condition: working_attraction["condition"],
+            sort_id: sort_id # filter後にランダムでアトラクションを指定する際に必要になるため
           }
+          sort_id += 1
         end
       end
       return working_attractions
