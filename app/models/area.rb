@@ -8,4 +8,5 @@
 #  updated_at :datetime         not null
 #
 class Area < ApplicationRecord
+  has_many :attractions
 end
