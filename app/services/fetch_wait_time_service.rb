@@ -41,10 +41,11 @@ class FetchWaitTimeService
       attractions = Attraction.all
 
       # 案内終了となっているアトラクションは除外する
-      # working_services = @scraping_services.filter do |service|
-      #   service["condition"].match?(/^\d+/)
-      # end
-      working_services = @scraping_services
+      working_services = @scraping_services.filter do |service|
+        service["condition"].match?(/^\d+/)
+      end
+
+      # working_services = @scraping_services
 
       sort_id = 1
 
