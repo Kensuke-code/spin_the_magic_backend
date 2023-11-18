@@ -3,8 +3,9 @@ require 'uri'
 require 'json'
 
 class FetchWaitTimeService
-  def initialize
+  def initialize(park:)
     @scraping_services = []
+    @park = park
   end
 
   def execute
@@ -22,9 +23,8 @@ class FetchWaitTimeService
     def cached_scraping_services
 
       # スクレイピングを走らせるため、提供元のサイトへの負荷を軽減させるため
-      Rails.cache.fetch("wait_time", expires_in: 1.day) do
-        park = 'sea'
-        uri = URI("https://r5yd59ix1d.execute-api.ap-northeast-1.amazonaws.com/v1/waittime\?park\=#{park}")
+      Rails.cache.fetch("wait_time_#{@park}", expires_in: 1.day) do
+        uri = URI("https://r5yd59ix1d.execute-api.ap-northeast-1.amazonaws.com/v1/waittime\?park\=#{@park}")
         response = Net::HTTP.get(uri)
 
         result = JSON.parse(response)
