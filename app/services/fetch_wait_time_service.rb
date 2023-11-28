@@ -23,7 +23,7 @@ class FetchWaitTimeService
     def cached_scraping_services
 
       # スクレイピングを走らせるため、提供元のサイトへの負荷を軽減させるため
-      Rails.cache.fetch("wait_time_#{@park}", expires_in: 1.day) do
+      Rails.cache.fetch("wait_time_#{@park}", expires_in: 15.minutes) do
         uri = URI("https://r5yd59ix1d.execute-api.ap-northeast-1.amazonaws.com/v1/waittime\?park\=#{@park}")
         response = Net::HTTP.get(uri)
 
