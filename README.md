@@ -1,3 +1,8 @@
+# 立ち上げ
+```
+docker compose build --no-cache && docker compose run --rm api rails db:create && docker compose run --rm api rails db:migrate && docker compose run --rm api rails db:seed && docker compose up -d
+```
+
 # コマンド
 
 - コンテナに入る
