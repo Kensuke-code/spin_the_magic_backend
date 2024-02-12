@@ -29,10 +29,11 @@ class FetchWaitTimeService
 
         result = JSON.parse(response)
         # resultの例
-        # [{ "name": "インディージョーンズ", "condition": "案内終了" },{ "name": "レイジングスピリッツ", "condition": "60" }]
+        # [{ "name": "インディージョーンズ", "condition": "案内終了" },{ "name": "レイジングスピリッツ", "condition": "60分" }]
     
         # 失敗時だと{"message"=>"Missing Authentication Token"}と配列サイズが1で返ってくるため
         result.length > 1 ? result : []
+
       end
     end
 
@@ -43,6 +44,13 @@ class FetchWaitTimeService
       # 案内終了となっているアトラクションは除外する
       working_services = @scraping_services.filter do |service|
         service["condition"].match?(/^\d+/)
+      end
+
+      # "condition": "60分"から"condition": "60"にすることで待ち時間の計算をしやすくするため
+      working_services.each do |attraction|
+        if attraction["condition"] =~ /\A\d+分\z/
+          attraction["condition"] = attraction["condition"].chomp("分").to_i
+        end
       end
 
       # working_services = @scraping_services
